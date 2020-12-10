@@ -1,0 +1,4 @@
+// Serializable é o processo de salvar ou transliterar um objeto em outro em um meio de 
+// armazenamento como um arquivo de computador ou um buffer de memória) ou 
+// transmiti-lo por uma conexão de rede, seja em forma binária ou em formato de texto 
+// como o XML ou JSON.
