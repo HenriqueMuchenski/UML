@@ -2,10 +2,21 @@ package com.umlspring.demo.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+// Definindo que esta classe modelo será uma tabela no banco de dados.
+@Entity
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	// Definindo a chave primaria.
+	@Id
+	// Definindo a chave primária como auto-incrementada.
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 
@@ -58,6 +69,5 @@ public class Categoria implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }

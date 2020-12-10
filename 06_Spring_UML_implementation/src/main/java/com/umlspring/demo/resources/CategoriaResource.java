@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.umlspring.demo.domain.Categoria;
 
-// Definindo esta classe como uma classe de controle
+// Definindo esta classe como uma classe de controle.
 @RestController
-// Definindo a rota para acessar os metodos desta classe controladora
+// Definindo a rota para acessar os metodos desta classe controladora.
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 	
