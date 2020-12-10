@@ -10,3 +10,11 @@
 
 // CommandLineRunner serve para conseguirmos adicionar métodos auxiliares
 // ao aplicação ser inicializada.
+
+// Como Categoria x Produto possuem o relacionamento Muitos para Muitos
+// iremos necessitar de uma tabela de associação no banco de dados.
+
+// Esta tabela de associação é criada a partir da anotação @JoinTable
+// e esta anotação deve ficar apenas em uma das duas classes do relacionamento.
+// É recomendado que esta anotação fique do lado mais forte da associação.
+// Do outro lado, apenas iremos informar em qual atributo a relação esta sendo mapeada.
