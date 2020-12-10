@@ -11,13 +11,15 @@ import com.umlspring.demo.repositories.CategoriaRepository;
 // Definindo esta classe como um componente de serviço.
 @Service
 public class CategoriaService {
-	
+
 	// Injeção de dependência.
 	@Autowired
 	private CategoriaRepository repository;
-	
+
 	public Categoria buscar(Integer id) {
-		Optional<Categoria> categoria =	repository.findById(id);
+
+		Optional<Categoria> categoria = repository.findById(id);
+
 		return categoria.orElse(null);
 	}
 }

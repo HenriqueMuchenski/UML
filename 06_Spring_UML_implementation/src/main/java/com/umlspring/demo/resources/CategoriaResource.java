@@ -23,7 +23,9 @@ public class CategoriaResource {
 	// @PathVariable é utilizado quando o valor da variável é passada diretamente na
 	// URL.
 	public ResponseEntity<Categoria> buscar(@PathVariable Integer id) {
+		
 		Categoria categoria = service.buscar(id);
+		
 		return ResponseEntity.ok().body(categoria);
 	}
 

@@ -7,3 +7,6 @@
 // um exemplo, é a possibilidade de injeção de dependencia com o @Autowired.
 
 // @PathVariable é utilizado quando o valor da variável é passada diretamente na URL.
+
+// CommandLineRunner serve para conseguirmos adicionar métodos auxiliares
+// ao aplicação ser inicializada.
