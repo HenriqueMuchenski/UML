@@ -2,3 +2,8 @@
 // armazenamento como um arquivo de computador ou um buffer de memória) ou 
 // transmiti-lo por uma conexão de rede, seja em forma binária ou em formato de texto 
 // como o XML ou JSON.
+
+// As anotações para componentes realizam várias funcionalidades para a classe
+// um exemplo, é a possibilidade de injeção de dependencia com o @Autowired.
+
+// @PathVariable é utilizado quando o valor da variável é passada diretamente na URL.
