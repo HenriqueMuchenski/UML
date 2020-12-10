@@ -18,3 +18,16 @@
 // e esta anotação deve ficar apenas em uma das duas classes do relacionamento.
 // É recomendado que esta anotação fique do lado mais forte da associação.
 // Do outro lado, apenas iremos informar em qual atributo a relação esta sendo mapeada.
+
+// Para resolver o problema de chamada cíclica de informações no formato Json
+
+// Exemplo do problema tentando buscar uma categoria em uma relação 1 para 1 com um produto:
+// Categoria -> Produto(Categoria->Produto(Categoria->Produto)) infinitamente
+
+// Para resolver isso, utilizamos a anotação @JsonManagedReference, que faz com que os dados associados
+// sejam carregados ao transformar o objeto em JSON.
+// E para controlar o looping, do outro lado da associação, utilizamos a anotação @JsonBackReference,
+// que irá ignorar os dados da outra classe que está associada.
+
+// Não se usa, normalmente, blocos try-catch em métodos de controladores REST.
+// Caso ocorram exceções, retornamos um objeto padrão de exceção no corpo da resposta.

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Produto implements Serializable {
 
@@ -28,8 +30,13 @@ public class Produto implements Serializable {
 	// Definindo a estrutura da tabela de associação entre Produto x categoria.
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 		joinColumns = @JoinColumn(name = "produto_id"),
-		inverseJoinColumns = @JoinColumn(name = "categoria_id")
-	)
+			inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	// Como do outro lado da associação já são buscados objetos
+	// associados(Produtos).
+	// @JsonBackReference irá ignorar a lista de categorias para cada produto
+	// incluso nesta lista de categorias.
+	// Desta forma resolvemos o problema cíclico do JSON, por conta da associação.
+	@JsonBackReference
 	private List<Categoria> categorias = new ArrayList<Categoria>();
 
 	public Produto() {
