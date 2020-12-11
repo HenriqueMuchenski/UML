@@ -32,6 +32,10 @@
 // Não se usa, normalmente, blocos try-catch em métodos de controladores REST.
 // Caso ocorram exceções, retornamos um objeto padrão de exceção no corpo da resposta.
 
+// @ControllerAdvice é uma anotação para classes que interceptam e lançam exceções ao corpo da resposta.
+// Dentro de uma classe ControllerAdvice existem métodos @ExceptionHandler(ObjectNotFoundException.class)
+// Que dentro da anotação recebem como parâmetro a exceção que realizarão o tratamento.
+
 // A anotação @JoinColumn indica que essa entidade é a proprietária do relacionamento (ou seja: a tabela correspondente 
 // tem uma coluna com uma chave estrangeira para a tabela referenciada), 
 // enquanto o atributo mappedBy indica que a entidade deste lado é o inverso do relacionamento e o proprietário reside na entidade “outro”. 
@@ -41,3 +45,19 @@
 // não há risco de serialização cíclica do JSON.
 // A cidade, neste caso, não conhece os endereços.
 // Mas o endereço conhece a cidade.
+
+// Quando queremos que duas classes diferentes possuam o mesmo id
+// utilizamos a anotação @MapsId em uma destas classes, no atributo 
+// que representa o relacionamento entre elas.
+// Na outra classe, utilizaremos a anotação @Relacionamento(cascade = CascadeType.ALL)
+
+// Quando a relação é 1 para 1, podemos fazer com que o id dessas classes sejam o mesmo.
+
+// cascade = CascadeType.ALL
+// Define o conjunto de operações em cascata que são propagadas
+// à entidade associada.
+
+// cascade=ALL is equivalent to cascade={PERSIST, MERGE, REMOVE, REFRESH, DETACH}
+
+// Anotação para mapear também as subclasses.
+// @Inheritance(strategy = InheritanceType.JOINED)
