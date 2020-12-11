@@ -23,6 +23,6 @@ public class CategoriaService {
 
 		// Retornando uma exceção para o controlador, caso categoria retorne null.
 		return categoria.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! " + id + ", Tipo: " + categoria.getClass().getName()));
+				"Objeto não encontrado! " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 }

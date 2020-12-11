@@ -31,3 +31,8 @@
 
 // Não se usa, normalmente, blocos try-catch em métodos de controladores REST.
 // Caso ocorram exceções, retornamos um objeto padrão de exceção no corpo da resposta.
+
+// A anotação @JoinColumn indica que essa entidade é a proprietária do relacionamento (ou seja: a tabela correspondente 
+// tem uma coluna com uma chave estrangeira para a tabela referenciada), 
+// enquanto o atributo mappedBy indica que a entidade deste lado é o inverso do relacionamento e o proprietário reside na entidade “outro”. 
+// Isso também significa que você pode acessar a outra tabela da classe que anotou com “mappedBy” (relacionamento totalmente bidirecional).
