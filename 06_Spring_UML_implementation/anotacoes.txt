@@ -36,3 +36,8 @@
 // tem uma coluna com uma chave estrangeira para a tabela referenciada), 
 // enquanto o atributo mappedBy indica que a entidade deste lado é o inverso do relacionamento e o proprietário reside na entidade “outro”. 
 // Isso também significa que você pode acessar a outra tabela da classe que anotou com “mappedBy” (relacionamento totalmente bidirecional).
+
+// Como a associação entre endereço e cidade é direcionada(só possui uma direção)
+// não há risco de serialização cíclica do JSON.
+// A cidade, neste caso, não conhece os endereços.
+// Mas o endereço conhece a cidade.
