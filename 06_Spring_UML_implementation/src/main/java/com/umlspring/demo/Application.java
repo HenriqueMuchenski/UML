@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.umlspring.demo.domain.Categoria;
 import com.umlspring.demo.domain.Cidade;
+import com.umlspring.demo.domain.Cliente;
+import com.umlspring.demo.domain.Endereco;
 import com.umlspring.demo.domain.Estado;
 import com.umlspring.demo.domain.Produto;
+import com.umlspring.demo.domain.enums.TipoCliente;
 import com.umlspring.demo.repositories.CategoriaRepository;
 import com.umlspring.demo.repositories.CidadeRepository;
+import com.umlspring.demo.repositories.ClienteRepository;
+import com.umlspring.demo.repositories.EnderecoRepository;
 import com.umlspring.demo.repositories.EstadoRepository;
 import com.umlspring.demo.repositories.ProdutoRepository;
 
@@ -28,7 +33,11 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	private EstadoRepository estadoRepository;
 	@Autowired
-	CidadeRepository cidadeRepository;
+	private CidadeRepository cidadeRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -37,6 +46,8 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		////////////////////////////////////////////////////////////////////////////////////
+		// Muitos(Categoria) x Muitos(Produto)
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
 
@@ -54,6 +65,9 @@ public class Application implements CommandLineRunner {
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
+		////////////////////////////////////////////////////////////////////////////////////
+		// Um(Estado) x Muitos(Cidade)
+
 		Estado est1 = new Estado(null, "MG");
 		Estado est2 = new Estado(null, "SP");
 
@@ -68,6 +82,23 @@ public class Application implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
+		////////////////////////////////////////////////////////////////////////////////////
+		// Um(Cliente) x Muitos(Enderecos)
+		// Um(Cidade) x Muitos(Enderecos)
+
+		Cliente cli1 = new Cliente(null, "Henrique", "muchenski.dev@gmail.com", "12345678912",
+				TipoCliente.PESSOA_FISICA);
+
+		cli1.getTelefone().addAll(Arrays.asList("41998896521", "4136965613"));
+
+		Endereco e1 = new Endereco(null, "Rua A", 123, "Sobrado 6", "Centro", "15900852", cli1, c1);
+		Endereco e2 = new Endereco(null, "Rua B", 321, "Apartamento 26", "Jadrim", "32650284", cli1, c3);
+
+		// Apenas adicionando os dados em memória.
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
+		clienteRepository.save(cli1);
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 	}
 
 }
