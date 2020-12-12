@@ -15,7 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -38,7 +37,7 @@ public class Produto implements Serializable {
 	// @JsonBackReference irá ignorar a lista de categorias para cada produto
 	// incluso nesta lista de categorias.
 	// Desta forma resolvemos o problema cíclico do JSON, por conta da associação.
-	@JsonBackReference
+	@JsonIgnore
 	private List<Categoria> categorias = new ArrayList<Categoria>();
 
 	@JsonIgnore

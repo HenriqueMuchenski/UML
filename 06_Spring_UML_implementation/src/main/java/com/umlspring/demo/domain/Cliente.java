@@ -14,8 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umlspring.demo.domain.enums.TipoCliente;
 
 @Entity
@@ -35,7 +34,6 @@ public class Cliente implements Serializable {
 	// Um endereço tem um cliente.
 	// Um para muitos.
 	@OneToMany(mappedBy = "cliente")
-	@JsonManagedReference
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 
 	// Gerando uma tabela para uma coleção.
@@ -44,7 +42,7 @@ public class Cliente implements Serializable {
 	private Set<String> telefone = new HashSet<String>();
 
 	@OneToMany(mappedBy = "cliente")
-	@JsonBackReference
+	@JsonIgnore
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 
 	public Cliente() {

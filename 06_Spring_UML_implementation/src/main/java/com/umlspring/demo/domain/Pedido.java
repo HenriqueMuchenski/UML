@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pedido implements Serializable {
@@ -31,7 +30,6 @@ public class Pedido implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
-	@JsonManagedReference
 	private Cliente cliente;
 
 	@ManyToOne
@@ -42,7 +40,6 @@ public class Pedido implements Serializable {
 	// à entidade associada.
 	// All = PERSIST, MERGE, REMOVE, REFRESH, DETACH
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
-	@JsonManagedReference
 	private Pagamento pagamento;
 
 	@OneToMany(mappedBy = "id.pedido")
