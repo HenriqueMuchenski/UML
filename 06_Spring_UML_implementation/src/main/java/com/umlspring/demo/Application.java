@@ -13,6 +13,7 @@ import com.umlspring.demo.domain.Cidade;
 import com.umlspring.demo.domain.Cliente;
 import com.umlspring.demo.domain.Endereco;
 import com.umlspring.demo.domain.Estado;
+import com.umlspring.demo.domain.ItemPedido;
 import com.umlspring.demo.domain.Pagamento;
 import com.umlspring.demo.domain.PagamentoComBoleto;
 import com.umlspring.demo.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.umlspring.demo.repositories.CidadeRepository;
 import com.umlspring.demo.repositories.ClienteRepository;
 import com.umlspring.demo.repositories.EnderecoRepository;
 import com.umlspring.demo.repositories.EstadoRepository;
+import com.umlspring.demo.repositories.ItemPedidoRepository;
 import com.umlspring.demo.repositories.PagamentoRepository;
 import com.umlspring.demo.repositories.PedidoRepository;
 import com.umlspring.demo.repositories.ProdutoRepository;
@@ -50,6 +52,8 @@ public class Application implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -67,8 +71,13 @@ public class Application implements CommandLineRunner {
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
 
+		// Apenas adicionando os dados em memória.
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().add(p2);
+
+		// Como o JoinTable entre Produto x Categoria está na classe Produto
+		// Adicionar a Categoria ao Produto sim irá resultar em inserções
+		// no banco de dados.
 
 		p1.getCategorias().add(cat1);
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
@@ -113,6 +122,9 @@ public class Application implements CommandLineRunner {
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
 		////////////////////////////////////////////////////////////////////////////////////
+		// Um(Pedido) x Um(Pagamento)
+		// Um(Cliente) x Muitos(Pedidos)
+		// Um(Endereco) x Muitos(Pedidos)
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -120,16 +132,34 @@ public class Application implements CommandLineRunner {
 		Pedido ped2 = new Pedido(null, sdf.parse("20/06/2020 18:32"), cli1, e2);
 
 		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		// Setando o pedido ao pagamento(para que seja possível possuirem o mesmo id).
 		ped1.setPagamento(pagto1);
 
 		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"),
 				null);
+		// Setando o pedido ao pagamento(para que seja possível possuirem o mesmo id).
 		ped2.setPagamento(pagto2);
 
+		// Apenas adicionando os dados em memória.
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+
+		////////////////////////////////////////////////////////////////////////////////////
+
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 200.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().add(ip3);
+
+		p1.getItens().add(ip1);
+		p2.getItens().add(ip3);
+		p3.getItens().add(ip2);
+
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 
 }

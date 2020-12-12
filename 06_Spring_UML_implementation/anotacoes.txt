@@ -61,3 +61,13 @@
 
 // Anotação para mapear também as subclasses.
 // @Inheritance(strategy = InheritanceType.JOINED)
+
+// A chave de uma classe de associação deve ser composta.
+// Anotação para uma classe que é um sub-tipo
+// @Embeddable
+// @EmbeddedId para definir que um id provem de uma classe composta
+
+
+// Gerando uma tabela para uma coleção.
+// @ElementCollection
+// @CollectionTable(name = "TELEFONE")

@@ -33,7 +33,7 @@ public class Endereco implements Serializable {
 	@JsonBackReference
 	private Cliente cliente;
 
-	// Como a associação entre endereço e cidade é direcionada
+	// Como a associação entre Endereço e Cidade é direcionada
 	// não há risco de serialização cíclica do JSON.
 
 	// Um endereço possui apenas uma cidade.
