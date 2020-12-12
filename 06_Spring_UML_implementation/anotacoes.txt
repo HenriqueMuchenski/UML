@@ -73,3 +73,7 @@
 // @CollectionTable(name = "TELEFONE")
 
 // Todas funções iniciadas com get são serializadas.
+
+// Discussão interessante sobre JsonIgnore vs JsonManagedReference e JsonBackReference
+
+https://stackoverflow.com/questions/37392733/difference-between-jsonignore-and-jsonbackreference-jsonmanagedreference
