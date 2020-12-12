@@ -71,3 +71,5 @@
 // Gerando uma tabela para uma coleção.
 // @ElementCollection
 // @CollectionTable(name = "TELEFONE")
+
+// Todas funções iniciadas com get são serializadas.

@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.umlspring.demo.domain.enums.TipoCliente;
 
@@ -43,6 +44,7 @@ public class Cliente implements Serializable {
 	private Set<String> telefone = new HashSet<String>();
 
 	@OneToMany(mappedBy = "cliente")
+	@JsonBackReference
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 
 	public Cliente() {
@@ -71,14 +73,6 @@ public class Cliente implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getemail() {
-		return email;
-	}
-
-	public void setemail(String email) {
-		this.email = email;
 	}
 
 	public String getCpfOuCnpj() {

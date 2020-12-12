@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.umlspring.demo.domain.enums.EstadoPagamento;
 
 @Entity
@@ -28,6 +29,7 @@ public abstract class Pagamento implements Serializable {
 	// O id do Pagamento será o mesmo id do pedido.
 	// Por este motivo não anotamos como auto-incrementado.
 	@MapsId
+	@JsonBackReference
 	private Pedido pedido;
 
 	public Pagamento() {
